@@ -81,8 +81,6 @@ export class StateDiagramComponent implements OnInit {
     'Step Before'
   ];
 
-  selectedNode: Node;
-
   ngOnInit() {
     this.getNodes();
     this.getLinks();
@@ -183,8 +181,5 @@ export class StateDiagramComponent implements OnInit {
 
   getLinks(): void {
     this.linkService.getLinks().subscribe(links => this.sampleLinks = links);
-  }
-  onSelect(node: Node): void {
-    this.selectedNode = node;
   }
 }

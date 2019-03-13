@@ -1,5 +1,5 @@
 export class Link {
-  source: number;
-  target: number;
+  source: string;
+  target: string;
   label: string;
 }

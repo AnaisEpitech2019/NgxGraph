@@ -13,4 +13,8 @@ export class NodeService {
   getNodes(): Observable<Node[]> {
     return of(NODES);
   }
+
+  getNode(idObj: number): Observable<Node> {
+    return of(NODES.find(node => node.idObj === idObj));
+  }
 }

@@ -28,8 +28,7 @@
 
     <ng-template #nodeTemplate let-node>
       <svg:g class="node"
-             [class.selected]="node === selectedNode"
-             (click)="onSelect(node)">
+             routerLink="/detail/{{node.idObj}}">
         <svg:rect [attr.width]="node.width"
                   [attr.height]="node.height"
                   [attr.fill]="node.color" />
@@ -63,5 +62,3 @@
 
   </ngx-graph>
 </div>
-
-<app-node-detail [node]="selectedNode"></app-node-detail>

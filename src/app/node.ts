@@ -1,5 +1,6 @@
 export class Node {
-  id: number;
+  id: string;
+  idObj: number;
   label: string;
   position: string;
   color: string;
