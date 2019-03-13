@@ -13,4 +13,8 @@ export class LinkService {
   getLinks(): Observable<Link[]> {
     return of(LINKS);
   }
+
+  getLink(idObj: number): Observable<Link> {
+    return of(LINKS.find(link => link.idObj === idObj));
+  }
 }

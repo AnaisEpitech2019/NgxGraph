@@ -2,64 +2,79 @@ import { Link } from './link';
 
 export const LINKS: Link[] = [
   {
+    idObj: 1,
     source: 'start',
-      target: '1',
+    target: '1',
     label: 'Process#1'
   }, {
+    idObj: 2,
     source: 'start',
-      target: '2',
-      label: 'Process#2'
+    target: '2',
+    label: 'Process#2'
   }, {
+    idObj: 3,
     source: '1',
-      target: '3',
-      label: 'Process#3'
+    target: '3',
+    label: 'Process#3'
   }, {
+    idObj: 4,
     source: '2',
-      target: '4',
-      label: 'Process#4'
+    target: '4',
+    label: 'Process#4'
   }, {
+    idObj: 5,
     source: '2',
-      target: '6',
-      label: 'Process#6'
+    target: '6',
+    label: 'Process#6'
   }, {
+    idObj: 6,
     source: '3',
-      target: '5',
-      label: 'Process#7'
+    target: '5',
+    label: 'Process#7'
   }, {
+    idObj: 7,
     source: '3',
-      target: '1',
-      label: 'ProcessReturn'
+    target: '1',
+    label: 'ProcessReturn'
   }, {
+    idObj: 8,
     source: '6',
-      target: '2',
-      label: 'ProcessReturn'
+    target: '2',
+    label: 'ProcessReturn'
   }, {
+    idObj: 9,
     source: '4',
-      target: '2',
-      label: 'ProcessReturn'
+    target: '2',
+    label: 'ProcessReturn'
   }, {
+    idObj: 10,
     source: '5',
-      target: '3',
-      label: 'ProcessReturn'
+    target: '3',
+    label: 'ProcessReturn'
   }, {
+    idObj: 11,
     source: '1',
-      target: 'start',
-      label: 'ProcessReturn'
+    target: 'start',
+    label: 'ProcessReturn'
   }, {
+    idObj: 12,
     source: '2',
-      target: 'start',
-      label: 'ProcessReturn'
+    target: 'start',
+    label: 'ProcessReturn'
   }, {
+    idObj: 13,
     source: '6',
-      target: '7',
-      label: 'Process#10'
+    target: '7',
+    label: 'Process#10'
   }, {
+    idObj: 14,
     source: '7',
-      target: '6',
-      label: 'ProcessReturn'
+    target: '6',
+    label: 'ProcessReturn'
   }, {
+    idObj: 15,
     source: '6',
-      target: '6',
-      label: 'ProcessLoop'
+    target: '6',
+    label: 'ProcessLoop'
   }
   ];
