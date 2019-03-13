@@ -3,6 +3,9 @@ import * as shape from 'd3-shape';
 import { NgxGraphModule } from '@swimlane/ngx-graph';
 import {colorSets} from '@swimlane/ngx-graph/release/utils';
 import {any} from 'codelyzer/util/function';
+import { NodeService } from '../node.service';
+import { LinkService } from '../link.service';
+import {Link} from '../link';
 
 @Component({
   selector: 'app-state-diagram',
@@ -11,6 +14,15 @@ import {any} from 'codelyzer/util/function';
   styleUrls: ['./state-diagram.component.css']
 })
 export class StateDiagramComponent implements OnInit {
+
+  constructor(private nodeService: NodeService, private linkService: LinkService) {
+    Object.assign(this, {
+      colorSchemes: colorSets,
+    });
+
+    this.setColorScheme('picnic');
+    this.setInterpolationType('Bundle');
+  }
 
   hierarchicalGraph = { nodes: [], links: [] };
 
@@ -27,112 +39,9 @@ export class StateDiagramComponent implements OnInit {
   schemeType = 'ordinal';
   selectedColorScheme: string;
 
-  sampleNodes = [
-    {
-      id: 'start',
-      label: 'Start',
-      position: 'x0',
-      color: '#4169E1'
-    }, {
-      id: '1',
-      label: 'State#a',
-      position: 'x1',
-      color: '#008000'
-    }, {
-      id: '2',
-      label: 'State#x',
-      position: 'x2',
-      color: '#008000'
-    }, {
-      id: '3',
-      label: 'State#b',
-      position: 'x3',
-      color: '#008000'
-    }, {
-      id: '4',
-      label: 'End#c',
-      position: 'x4',
-      color: '#FF0000'
-    }, {
-      id: '5',
-      label: 'End#y',
-      position: 'x5',
-      color: '#FF0000'
-    }, {
-      id: '6',
-      label: 'State#z',
-      position: 'x6',
-      color: '#008000'
-    }, {
-      id: '7',
-      label: 'End#x',
-      position: 'x7',
-      color: '#FF0000'
-    }
-  ];
+  sampleNodes: Node[];
 
-  sampleLinks = [ {
-    source: 'start',
-    target: '1',
-    label: 'Process#1'
-  }, {
-    source: 'start',
-    target: '2',
-    label: 'Process#2'
-  }, {
-    source: '1',
-    target: '3',
-    label: 'Process#3'
-  }, {
-    source: '2',
-    target: '4',
-    label: 'Process#4'
-  }, {
-    source: '2',
-    target: '6',
-    label: 'Process#6'
-  }, {
-    source: '3',
-    target: '5',
-    label: 'Process#7'
-  }, {
-    source: '3',
-    target: '1',
-    label: 'ProcessReturn'
-  }, {
-    source: '6',
-    target: '2',
-    label: 'ProcessReturn'
-  }, {
-    source: '4',
-    target: '2',
-    label: 'ProcessReturn'
-  }, {
-    source: '5',
-    target: '3',
-    label: 'ProcessReturn'
-  }, {
-    source: '1',
-    target: 'start',
-    label: 'ProcessReturn'
-  }, {
-    source: '2',
-    target: 'start',
-    label: 'ProcessReturn'
-  }, {
-    source: '6',
-    target: '7',
-    label: 'Process#10'
-  }, {
-    source: '7',
-    target: '6',
-    label: 'ProcessReturn'
-  }, {
-    source: '6',
-    target: '6',
-    label: 'ProcessLoop'
-  }
-  ];
+  sampleLinks: Link[];
 
   // options
   showLegend = true;
@@ -172,16 +81,11 @@ export class StateDiagramComponent implements OnInit {
     'Step Before'
   ];
 
-  constructor() {
-    Object.assign(this, {
-      colorSchemes: colorSets,
-    });
-
-    this.setColorScheme('picnic');
-    this.setInterpolationType('Bundle');
-  }
+  selectedNode: Node;
 
   ngOnInit() {
+    this.getNodes();
+    this.getLinks();
     this.hierarchicalGraph.nodes = this.sampleNodes;
     this.hierarchicalGraph.links = this.sampleLinks;
 
@@ -271,5 +175,16 @@ export class StateDiagramComponent implements OnInit {
 
   center() {
     // this.center$.next(true);
+  }
+
+  getNodes(): void {
+    this.nodeService.getNodes().subscribe(nodes => this.sampleNodes = nodes);
+  }
+
+  getLinks(): void {
+    this.linkService.getLinks().subscribe(links => this.sampleLinks = links);
+  }
+  onSelect(node: Node): void {
+    this.selectedNode = node;
   }
 }

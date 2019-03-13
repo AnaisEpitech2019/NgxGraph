@@ -1,3 +1,7 @@
-<p>
-  state-details works!
-</p>
+<h2>{{node.label | uppercase}} Details</h2>
+<div><span>id: </span>{{node.id}}</div>
+<div>
+  <label>name:
+    <input [(ngModel)]="node.label" placeholder="name"/>
+  </label>
+</div>
