@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import * as shape from 'd3-shape';
-import { NgxGraphModule } from '@swimlane/ngx-graph';
+import { any } from 'codelyzer/util/function';
 import {colorSets} from '@swimlane/ngx-graph/release/utils';
-import {any} from 'codelyzer/util/function';
 import { NodeService } from '../node.service';
 import { LinkService } from '../link.service';
-import {Link} from '../link';
+import { Link } from '../link';
+import { Node } from '../node';
 
 @Component({
   selector: 'app-state-diagram',
@@ -14,6 +14,9 @@ import {Link} from '../link';
   styleUrls: ['./state-diagram.component.css']
 })
 export class StateDiagramComponent implements OnInit {
+  nodes: Node[];
+  links: Link[];
+  hierarchicalGraph = { nodes: [], links: [] };
 
   constructor(private nodeService: NodeService, private linkService: LinkService) {
     Object.assign(this, {
@@ -24,68 +27,22 @@ export class StateDiagramComponent implements OnInit {
     this.setInterpolationType('Bundle');
   }
 
-  hierarchicalGraph = { nodes: [], links: [] };
-
   view: any[];
   width = any;
   height = any;
   fitContainer = true;
-  autoZoom = true;
-  panOnZoom = true;
-  enableZoom = true;
-  autoCenter = true;
   colorSchemes: any;
   colorScheme: any;
-  schemeType = 'ordinal';
   selectedColorScheme: string;
-
-  sampleNodes: Node[];
-
-  sampleLinks: Link[];
-
-  // options
-  showLegend = true;
-  orientation = 'LR'; // LR, RL, TB, BT
-  orientations: any[] = [
-    {
-      label: 'Left to Right',
-      value: 'LR'
-    },
-    {
-      label: 'Right to Left',
-      value: 'RL'
-    },
-    {
-      label: 'Top to Bottom',
-      value: 'TB'
-    },
-    {
-      label: 'Bottom to Top',
-      value: 'BT'
-    }
-  ];
-
-  // line interpolation
+// line interpolation
   curveType = 'Linear';
   curve = shape.curveBundle.beta(1);
-  interpolationTypes = [
-    'Bundle',
-    'Cardinal',
-    'Catmull Rom',
-    'Linear',
-    'Monotone X',
-    'Monotone Y',
-    'Natural',
-    'Step',
-    'Step After',
-    'Step Before'
-  ];
 
   ngOnInit() {
     this.getNodes();
     this.getLinks();
-    this.hierarchicalGraph.nodes = this.sampleNodes;
-    this.hierarchicalGraph.links = this.sampleLinks;
+    this.hierarchicalGraph.nodes = this.nodes;
+    this.hierarchicalGraph.links = this.links;
 
     if (!this.fitContainer) {
       this.applyDimensions();
@@ -94,22 +51,6 @@ export class StateDiagramComponent implements OnInit {
 
   applyDimensions() {
     this.view = [this.width, this.height];
-  }
-
-  toggleEnableZoom(enableZoom: boolean) {
-    this.enableZoom = enableZoom;
-  }
-
-  toggleFitContainer(fitContainer: boolean, autoZoom: boolean, autoCenter: boolean): void {
-    this.fitContainer = fitContainer;
-    this.autoZoom = autoZoom;
-    this.autoCenter = autoCenter;
-
-    if (this.fitContainer) {
-      this.view = undefined;
-    } else {
-      this.applyDimensions();
-    }
   }
 
   select(data) {
@@ -159,27 +100,11 @@ export class StateDiagramComponent implements OnInit {
     console.log('Legend clicked', entry);
   }
 
-  toggleExpand(node) {
-    console.log('toggle expand', node);
-  }
-
-  updateChart() {
-    // this.update$.next(true);
-  }
-
-  zoomToFit() {
-    // this.zoomToFit$.next(true);
-  }
-
-  center() {
-    // this.center$.next(true);
-  }
-
   getNodes(): void {
-    this.nodeService.getNodes().subscribe(nodes => this.sampleNodes = nodes);
+   this.nodeService.getNodes().subscribe(nodes => this.nodes = nodes);
   }
 
   getLinks(): void {
-    this.linkService.getLinks().subscribe(links => this.sampleLinks = links);
+    this.linkService.getLinks().subscribe(links => this.links = links);
   }
 }
