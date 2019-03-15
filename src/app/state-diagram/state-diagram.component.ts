@@ -24,7 +24,7 @@ export class StateDiagramComponent implements OnInit {
     });
 
     this.setColorScheme('picnic');
-    this.setInterpolationType('Bundle');
+    this.setInterpolationType();
   }
 
   view: any[];
@@ -34,9 +34,10 @@ export class StateDiagramComponent implements OnInit {
   colorSchemes: any;
   colorScheme: any;
   selectedColorScheme: string;
+
 // line interpolation
   curveType = 'Linear';
-  curve = shape.curveBundle.beta(1);
+  curveLines: any;
 
   ngOnInit() {
     this.getNodes();
@@ -62,37 +63,36 @@ export class StateDiagramComponent implements OnInit {
     this.colorScheme = this.colorSchemes.find(s => s.name === name);
   }
 
-  setInterpolationType(curveType) {
-    this.curveType = curveType;
-    if (curveType === 'Bundle') {
-      this.curve = shape.curveBundle.beta(1);
+  setInterpolationType() {
+    if (this.curveType === 'Bundle') {
+      this.curveLines = shape.curveBundle.beta(1);
     }
-    if (curveType === 'Cardinal') {
-      this.curve = shape.curveCardinal;
+    if (this.curveType === 'Cardinal') {
+      this.curveLines = shape.curveCardinal;
     }
-    if (curveType === 'Catmull Rom') {
-      this.curve = shape.curveCatmullRom;
+    if (this.curveType === 'Catmull Rom') {
+      this.curveLines = shape.curveCatmullRom;
     }
-    if (curveType === 'Linear') {
-      this.curve = shape.curveLinear;
+    if (this.curveType === 'Linear') {
+      this.curveLines = shape.curveLinear;
     }
-    if (curveType === 'Monotone X') {
-      this.curve = shape.curveMonotoneX;
+    if (this.curveType === 'Monotone X') {
+      this.curveLines = shape.curveMonotoneX;
     }
-    if (curveType === 'Monotone Y') {
-      this.curve = shape.curveMonotoneY;
+    if (this.curveType === 'Monotone Y') {
+      this.curveLines = shape.curveMonotoneY;
     }
-    if (curveType === 'Natural') {
-      this.curve = shape.curveNatural;
+    if (this.curveType === 'Natural') {
+      this.curveLines = shape.curveNatural;
     }
-    if (curveType === 'Step') {
-      this.curve = shape.curveStep;
+    if (this.curveType === 'Step') {
+      this.curveLines = shape.curveStep;
     }
-    if (curveType === 'Step After') {
-      this.curve = shape.curveStepAfter;
+    if (this.curveType === 'Step After') {
+      this.curveLines = shape.curveStepAfter;
     }
-    if (curveType === 'Step Before') {
-      this.curve = shape.curveStepBefore;
+    if (this.curveType === 'Step Before') {
+      this.curveLines = shape.curveStepBefore;
     }
   }
 
