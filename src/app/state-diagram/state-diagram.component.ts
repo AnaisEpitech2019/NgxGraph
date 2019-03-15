@@ -34,8 +34,6 @@ export class StateDiagramComponent implements OnInit {
   colorSchemes: any;
   colorScheme: any;
   selectedColorScheme: string;
-
-// line interpolation
   curveType = 'Linear';
   curveLines: any;
 
@@ -64,35 +62,40 @@ export class StateDiagramComponent implements OnInit {
   }
 
   setInterpolationType() {
-    if (this.curveType === 'Bundle') {
-      this.curveLines = shape.curveBundle.beta(1);
-    }
-    if (this.curveType === 'Cardinal') {
-      this.curveLines = shape.curveCardinal;
-    }
-    if (this.curveType === 'Catmull Rom') {
-      this.curveLines = shape.curveCatmullRom;
-    }
-    if (this.curveType === 'Linear') {
-      this.curveLines = shape.curveLinear;
-    }
-    if (this.curveType === 'Monotone X') {
-      this.curveLines = shape.curveMonotoneX;
-    }
-    if (this.curveType === 'Monotone Y') {
-      this.curveLines = shape.curveMonotoneY;
-    }
-    if (this.curveType === 'Natural') {
-      this.curveLines = shape.curveNatural;
-    }
-    if (this.curveType === 'Step') {
-      this.curveLines = shape.curveStep;
-    }
-    if (this.curveType === 'Step After') {
-      this.curveLines = shape.curveStepAfter;
-    }
-    if (this.curveType === 'Step Before') {
-      this.curveLines = shape.curveStepBefore;
+    switch (this.curveType) {
+      case 'Bundle':
+        this.curveLines = shape.curveBundle.beta(1);
+        break;
+      case 'Cardinal':
+        this.curveLines = shape.curveCardinal;
+        break;
+      case 'Catmull Rom':
+        this.curveLines = shape.curveCatmullRom;
+        break;
+      case 'Linear':
+        this.curveLines = shape.curveLinear;
+        break;
+      case 'Monotone X':
+        this.curveLines = shape.curveMonotoneX;
+        break;
+      case 'Monotone Y':
+        this.curveLines = shape.curveMonotoneY;
+        break;
+      case 'Natural':
+        this.curveLines = shape.curveNatural;
+        break;
+      case 'Step':
+        this.curveLines = shape.curveStep;
+        break;
+      case 'Step After':
+        this.curveLines = shape.curveStepAfter;
+        break;
+      case 'Step Before':
+        this.curveLines = shape.curveStepBefore;
+        break;
+      default:
+        this.curveLines = shape.curveLinear;
+        break;
     }
   }
 
