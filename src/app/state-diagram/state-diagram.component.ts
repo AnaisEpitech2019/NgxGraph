@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import * as shape from 'd3-shape';
 import { any } from 'codelyzer/util/function';
-import {colorSets} from '@swimlane/ngx-graph/release/utils';
+import {colorSets, id} from '@swimlane/ngx-graph/release/utils';
 import { NodeService } from '../node.service';
 import { LinkService } from '../link.service';
 import { Link } from '../link';
 import { Node } from '../node';
+import { Graph, Edge, Layout } from '../app.module';
 
 @Component({
   selector: 'app-state-diagram',
@@ -34,7 +35,7 @@ export class StateDiagramComponent implements OnInit {
   colorSchemes: any;
   colorScheme: any;
   selectedColorScheme: string;
-  curveType = 'Linear';
+  curveType = 'Step After';
   curveLines: any;
 
   ngOnInit() {
