@@ -6,7 +6,6 @@ import { NodeService } from '../node.service';
 import { LinkService } from '../link.service';
 import { Link } from '../link';
 import { Node } from '../node';
-import { Graph, Edge, Layout } from '../app.module';
 
 @Component({
   selector: 'app-state-diagram',

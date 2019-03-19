@@ -43,22 +43,28 @@
     </ng-template>
 
     <ng-template #linkTemplate let-link>
-      <svg:g class="edge">
+      <svg:g class="edge"
+             ngx-tooltip
+             [tooltipPlacement]="'top'"
+             [tooltipType]="'tooltip'"
+             [tooltipTitle]="link.label">
         <svg:path
           class="line"
           stroke-width="2"
           marker-end="url(#arrow)">
         </svg:path>
+        <!--
         <svg:text
           class="edge-label"
           text-anchor="middle">
           <textPath
-            style="fill: #666;"
+            class="edge-path"
             [attr.href]="'#' + link.id"
             startOffset="50%">
             {{link.label}}
           </textPath>
         </svg:text>
+        -->
       </svg:g>
     </ng-template>
 
